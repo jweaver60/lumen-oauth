@@ -22,7 +22,8 @@ $app->post('oauth/access_token', function() {
 });
 
 $app->get('oauth/authorized_user', ['middleware' => 'oauth', function() {
-  return response()->json(Authorizer::getResourceOwnerId());
+  $user = ["user_id" => Authorizer::getResourceOwnerId()];
+  return response()->json($user);
 }]);
 
 $app->get('auth', function () use ($app) {
