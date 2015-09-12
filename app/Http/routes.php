@@ -21,6 +21,10 @@ $app->post('oauth/access_token', function() {
     return response()->json(Authorizer::issueAccessToken());
 });
 
+$app->get('oauth/authorized_user', ['middleware' => 'oauth', function() {
+  return response()->json(Authorizer::getResourceOwnerId());
+}]);
+
 $app->get('auth', function () use ($app) {
     $authManager = app()["auth"];
     dd(app()["auth"]->once(["email" => "jweaver60@gmail.com", "password" => "test"]));
